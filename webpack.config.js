@@ -1,6 +1,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
 
+const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build')
@@ -30,7 +31,8 @@ const common = {
 
 if(TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
-    devServer: {
+      devtool: 'eval-source-map',
+      devServer: {
       contentBase: PATHS.build,
 
       // Enable history API fallback so HTML5 History API based
@@ -61,6 +63,6 @@ if(TARGET === 'start' || !TARGET) {
 
 }
 
-if(TARGET === 'build') {
-  module.exports = merge(common, {});
-}
+// if(TARGET === 'build') {
+//   module.exports = merge(common, {});
+// }
